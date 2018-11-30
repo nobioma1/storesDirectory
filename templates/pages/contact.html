@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<!-- container -->
+{% block content %}
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{%url 'contact' %}">Contact
+        <span class="sr-only">(current)</span>
+      </a>
+    </li>
+  </ul>
+</div>
+</div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-3">
+  <h1 class="my-4">{{user.username}}</h1>
+  <div class="list-group">
+    <a href="/" class="btn btn-warning">Cancel</a>
+  </div>
+</div>
+<!-- /.col-lg-3 -->
+
+<div class="col-lg-9">
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3 class="card-title">Send Us a Message: </h3>
+      <form class="" action="" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-primary" type="Submit" value="Send">
+      </form>
+    </div>
+  </div>
+  <!-- /.card -->
+
+</div>
+<!-- /.col-lg-9 -->
+
+</div>
+
+</div>
+<p>&nbsp;</p>
+<!--container -->
+{% endblock content %}

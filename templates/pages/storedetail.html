@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+<!-- container -->
+{% block content %}
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+  </ul>
+</div>
+</div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+<div class="row">
+
+{% if user.is_authenticated %}
+  <div class="col-lg-3">
+    <h1 class="my-4">Hi {{ user.username }}!</h1>
+    <h5 class="">{{ user.email }}</h5>
+    <div class="list-group">
+      <a href="{% url 'editstore' store.pk %}" class="btn btn-success">Update</a>
+      <a href="{% url 'deletestore' store.pk %}" class="btn btn-danger">Delete</a>
+      <a href="{% url 'newstore' %}" class="btn btn-primary">Create New Store</a>
+      <a href="{% url 'logout' %}" class="btn btn-warning">Logout</a>
+    </div>
+  </div>
+{% else %}
+<div class="col-lg-3">
+  <h1 class="my-4">Hi, Guest!!</h1>
+  <div class="list-group">
+    <a href="{% url 'login' %}" class="list-group-item">Login</a>
+    <a href="{% url 'signup' %}" class="list-group-item">Sign Up</a>
+  </div>
+</div>
+{% endif %}
+<!-- /.col-lg-3 -->
+
+<div class="col-lg-9">
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3 class="card-title">{{store.storename}}</h3>
+      <h5>Owner: {{store.storeowner}}</h5>
+      <small class="text-muted">Address: {{ store.storeaddress }} ||</small>
+      <small class="text-muted"> Contact: {{ store.contact }}</small>
+      <p class="card-text">{{store.storedetails}}</p>
+      <!-- rating -->
+      {% if store.stars == 1 %}
+        <span class="text-warning">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
+        1.0 stars
+      {% elif store.stars == 2 %}
+        <span class="text-warning">&#9733; &#9733; &#9734; &#9734; &#9734;;</span>
+        2.0 stars
+      {% elif store.stars == 3 %}
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+        3.0 stars
+      {% elif store.stars == 4 %}
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+        4.0 stars
+      {% elif store.stars == 5 %}
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+        5.0 stars
+      {% else %}
+        <span class="text-warning">&#9734; &#9734; &#9734; &#9734; &#9734;</span>
+        - stars
+      {% endif %}
+      <small class="text-muted">Posted Date: {{ store.create_date }}</small>
+    </div>
+  </div>
+  <!-- /.card -->
+
+</div>
+<!-- /.col-lg-9 -->
+
+</div>
+
+</div>
+<p>&nbsp;</p>
+<!--container -->
+{% endblock content %}

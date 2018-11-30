@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+<!-- container -->
+{% block content %}
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'index' %}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+  </ul>
+</div>
+</div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-3">
+  <h1 class="my-4">{{ user.username }}</h1>
+  <h5 class="">{{ user.email }}</h5>
+  <div class="list-group">
+    <a href="/" class="btn btn-warning">Cancel</a>
+  </div>
+</div>
+<!-- /.col-lg-3 -->
+
+<div class="col-lg-9">
+
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3 class="card-title">Are you sure you want to delete??</h3>
+      <form class="" action="" method="post">
+        {%csrf_token%}
+        <div class="card mt-4">
+          <div class="card-body">
+            <h3 class="card-title">{{store.storename}}</h3>
+            <h5>Owner: {{store.storeowner}}</h5>
+            <small class="text-muted">Address: {{ store.storeaddress }} ||</small>
+            <small class="text-muted"> Contact: {{ store.contact }}</small>
+          </div>
+        <input class="btn btn-danger" type="Submit" value="Delete">
+      </form>
+    </div>
+  </div>
+  <!-- /.card -->
+
+</div>
+<!-- /.col-lg-9 -->
+
+</div>
+
+</div>
+<p>&nbsp;</p>
+<!--container -->
+{% endblock content %}

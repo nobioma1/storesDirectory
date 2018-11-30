@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- container -->
+<div class="collapse navbar-collapse" id="navbarResponsive">
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'index' %}">Home
+        <span class="sr-only">(current)</span>
+      </a>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+    </li>
+  </ul>
+</div>
+</div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-3">
+  <h1 class="my-4"></h1>
+  <div class="list-group">
+    {% if user.is_authenticated %}
+      <h2>Hi {{ user.username }}!</h2>
+      <h5 class="">{{ user.email }}</h5>
+      <a href="{% url 'newstore' %}" class="list-group-item">Create New Store</a>
+      <a href="{% url 'logout' %}" class="list-group-item">Logout</a>
+    {% else %}
+    <a href="{% url 'login' %}" class="list-group-item">Login</a>
+    <a href="{% url 'signup' %}" class="list-group-item">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+<!-- /.col-lg-3 -->
+
+<div class="col-lg-9">
+  <!-- /.card -->
+  <h3>Registered Stores</h3>
+{% for store in object_list %}
+  <div class="card card-outline-secondary my-4">
+    <div class="card-header">
+      <h6>{{store.pk}} ** {{ store.storename }}</h6>
+    </div>
+    <div class="card-body">
+      <p>Address: {{ store.storeaddress }}</p>
+      <hr>
+      <p>Store Owner: {{ store.storeowner }}</p>
+      <hr>
+      <p>Contact: {{ store.contact }}</p>
+      <small class="text-muted">Posted by {{ store.author }} on {{ store.create_date }}</small>
+      <hr>
+      <!-- rating -->
+      {% if store.stars == 1 %}
+        <span class="text-warning">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
+        1.0 stars
+      {% elif store.stars == 2 %}
+        <span class="text-warning">&#9733; &#9733; &#9734; &#9734; &#9734;;</span>
+        2.0 stars
+      {% elif store.stars == 3 %}
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+        3.0 stars
+      {% elif store.stars == 4 %}
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+        4.0 stars
+      {% elif store.stars == 5 %}
+        <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+        5.0 stars
+      {% else %}
+        <span class="text-warning">&#9734; &#9734; &#9734; &#9734; &#9734;</span>
+        - stars
+      {% endif %}
+      <a href="{% url 'storedetail' store.pk %}" class="btn btn-success">View More About Store</a>
+    </div>
+  </div>
+ {% endfor %}
+  <!-- /.card -->
+
+</div>
+<!-- /.col-lg-9 -->
+
+</div>
+
+</div>
+<!--container -->
+{% endblock content %}
